@@ -34,10 +34,14 @@ def save_log(ram,cpu,disk):
 
 print("Monitor started. Press Ctrl+C to stop")
 
-while True:
-    ram, cpu, disk = get_status()
-    check_warnings(ram, cpu, disk)
-    save_log(ram, cpu, disk)
-    time.sleep(60)
-     
-    
+try:
+    while True:
+        try:
+            ram, cpu, disk = get_status()
+            check_warnings(ram, cpu, disk)
+            save_log(ram, cpu, disk)
+            time.sleep(60)
+        except Exception as e:
+            print(f"Error: {e}")
+except KeyboardInterrupt:
+    print("\nMonitor stopped.")    
